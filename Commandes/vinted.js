@@ -4,32 +4,39 @@ const vinted = require('vinted-api');
 
 module.exports.run = async(client, message, args) => {
     message.delete()
-
-    // const creaEmbed = new MessageEmbed()
-    //     .setColor('#0099ff')
-    //     .setTitle('Vinted Moniteur')
-    //     .setURL('https://discord.gg/J8A2bptp')
-    //     .setAuthor({ name: 'vMoniteur v1.0.0', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-    //     .setDescription("Bot Vinted vous permettant d\'avoir des produits intéressants avant tout le monde pour pas cher")
-    //     .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-    //     .addFields(
-    //         { name: 'Prix du Bot', value: '50 €' },
-    //         { name: '\u200B', value: '\u200B' },
-    //         { name: 'Lorem ipsum', value: ' 25 €', inline: true },
-    //         { name: 'Dolor', value: '10 €', inline: true },
-    //     )
-    //     .addField('Pantalon Celio', '45 €', true)
-    //     .setImage('https://i.imgur.com/AfFp7pu.png')
-    //     .setTimestamp()
-    //     .setFooter({ text: 'By Jamessss', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
-    //
-    // message.channel.send({embeds: [creaEmbed] });
+    // TODO récupérer la conditions des articles...
+    vinted.search('https://www.vinted.fr/vetements?search_text=&search_id=4855886943&brand_id[]=88&order=newest_first').then((posts) => {
+        posts.items.forEach(product => {
 
 
-    vinted.search('https://www.vinted.fr/vetements?brand_id[]=32').then((posts) => {
-        
-        console.log (posts.items[3].title)
-    });
+            const creaEmbed = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle(product.title)
+                .setURL(product.url)
+                .setAuthor({ name: product.brand_title, iconURL: 'https://i.imgur.com/AfFp7pu.png', url: product.url })
+                .addFields(
+                    { name: 'Taille', value: product.size_title + '.', inline: true },
+                          { name: 'Marque', value: product.brand_title, inline: true },
+                          { name: 'Prix', value: product.price.substring(0, product.price.length-2)+" €", inline: true },
+                         { name: '\u200B', value: '\u200B' },
+                       { name: 'Condition', value: product.brand_title, inline: true },
+                    { name: 'Vendeur', value: product.user.login+"/" }
+                )
+
+                .setThumbnail('https://i.imgur.com/AfFp7pu.png')
+
+                .setImage(product.photo.url)
+                .setTimestamp()
+                .setFooter({ text: 'By Jamessss', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+
+            message.channel.send({embeds: [creaEmbed] });
+
+
+            // posts.items.forEach(product => {
+
+                console.log (product)
+            });
+        });
 
 
 
@@ -39,14 +46,3 @@ module.exports.run = async(client, message, args) => {
 module.exports.help = {
     name:"vinted"
 }
-
-
-// vinted.search('https://www.vinted.fr/vetements?brand_id[]=53').then((posts) => {
-//     const creaEmbed = new Discord.MessageEmbed()
-//         .setAuthor(message.author.username)
-//         .setColor("#00BDFF")
-//         .setDescription(posts)
-//
-//     message.channel.send(creaEmbed);
-//
-// });
