@@ -9,7 +9,8 @@ module.exports = async (client, message) => {
     setInterval(function() {
         let statusstyle = [
             `${prefix}help`,
-            `J'aime ${config.speudo}`
+            // `J'aime ${config.speudo}`
+            'faire ta daronne'
         ]
         
         let status = statusstyle[Math.floor(Math.random() * statusstyle.length)];

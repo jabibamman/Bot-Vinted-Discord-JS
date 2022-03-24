@@ -5,7 +5,9 @@ const vinted = require('vinted-api');
 module.exports.run = async(client, message, args) => {
     message.delete()
     // TODO récupérer la conditions des articles...
-    vinted.search('https://www.vinted.fr/vetements?search_text=&search_id=4855886943&brand_id[]=88&order=newest_first').then((posts) => {
+
+
+    vinted.search('https://www.vinted.fr/vetements?search_text=Court%20purple&search_id=4874024641&brand_id[]=53&size_id[]=784&order=newest_first&currency=EUR').then((posts) => {
         posts.items.forEach(product => {
 
 
@@ -32,10 +34,12 @@ module.exports.run = async(client, message, args) => {
             message.channel.send({embeds: [creaEmbed] });
 
 
-            // posts.items.forEach(product => {
 
-                console.log (product)
+
+                console.log (product);
             });
+
+
         });
 
 
