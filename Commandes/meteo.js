@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const weather = require("weather-js");
 const config = require("../config.json");
 var prefix = config.prefix;
@@ -111,17 +111,17 @@ module.exports.run = (client, message, args) => {
               Dir = "Aucun vent";
               break;
           }
-    
-          const météoEmbed = new Discord.MessageEmbed()
+
+          const météoEmbed = new MessageEmbed()
             .setDescription(`**${frTemps}**`)
-            .setAuthor(`Météo pour ${current.observationpoint}`)
+            .setAuthor({ name: `Météo pour ${current.observationpoint}` })
             .setThumbnail(current.imageUrl)
             .setColor(
-              `${
-                message.guild.me.displayHexColor !== "#00000"
-                  ? message.guild.me.displayHexColor
-                  : 0xffffff
-              }`
+                `${
+                    message.guild.me.displayHexColor !== "#00000"
+                        ? message.guild.me.displayHexColor
+                        : 0xffffff
+                }`
             )
             .addField("Fuseau horaire", `UTC${result[0].location.timezone}`, true)
             .addField("Température", `${current.temperature} Degrés`, true)
@@ -129,7 +129,7 @@ module.exports.run = (client, message, args) => {
             .addField("Vitesse du vent :", vitesse, true)
             .addField("Direction du vent :", Dir, true)
             .addField("Humidité", `${current.humidity}%`, true);
-          message.channel.send(météoEmbed);
+          message.channel.send({embeds : [météoEmbed]});
         }catch {
           message.channel.send("**S'il vous plaît, fournissez moi un emplacement valide.**")
         }})

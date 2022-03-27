@@ -75,7 +75,7 @@ client.on('message', message =>{
   
   client.on('message', message =>{
     if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "bien"){
+    if(message.content.toLowerCase() === "bien"){
       message.channel.send('ok')
     }
   })
