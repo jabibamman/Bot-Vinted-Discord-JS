@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 
-const vinted = require('vinted-api');
+plpk
 
 module.exports.run = async(client, message, args) => {
     message.delete()

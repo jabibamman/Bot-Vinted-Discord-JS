@@ -2,13 +2,9 @@
 const fs = require('fs');
 const config = require('./config.json');
 
-
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-
 client.commands = new Collection();
-
-
 
 var prefix = config.prefix;
 
@@ -39,67 +35,41 @@ client.login(config.token);
 
 
 client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "bonjour"){
-      message.channel.send('Bonjour !')
+    if(!message.guild || message.author.bot === true) return;
+    switch (message.content.toLowerCase()) {
+        case "bonjour":
+            message.channel.send("Bonjour!");
+            break;
+
+        case "bonsoir":
+            message.channel.send("Soir Bon !");
+            break;
+
+        case "salut":
+            message.channel.send("Salutation !");
+            break;
+
+        case "comment ca va ?":
+            message.channel.send("Bien et vous ?");
+            break;
+
+        case "bien":
+            message.channel.send("ok.");
+            break;
+
+        // Insulte
+        case "tg":
+            message.channel.send("Oh les insultes !");
+            break;
+
+        case "ton daron":
+            message.channel.send("Ton gros daron mon reuf !");
+            break;
+
+        case "ftg":
+            message.channel.send("ta grand mère je lui met 4 coup de couteau gros chien");
+            break;
+
     }
-  })
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "bonsoir"){
-      message.channel.send('Soir Bon !')
-    }
-  })
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "salut"){
-      message.channel.send('Salutation !')
-    }
-  })
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "comment ca va ?"){
-      message.channel.send('Bien et vous ? ')
-    }
-  })
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "comment ca va"){
-      message.channel.send('Bien et vous ? ')
-    }
-  })
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() === "bien"){
-      message.channel.send('ok')
-    }
-  })
-  
-  
-  //// insulte
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "tg"){
-      message.reply('Ow les insultes !')
-    }
-  })
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "fdp"){
-      message.reply('Ow les insultes !')
-    }
-  }) 
-  
-  client.on('message', message =>{
-    if(!message.guild || message.author.bot == true) return;
-    if(message.content.toLowerCase() == "ftg"){
-      message.reply('Ow les insultes !')
-    }
-  });
+
+});

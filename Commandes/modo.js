@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const config = require('./config.json');
 
 module.exports.run = async(client, message, args) => {
-const modoEmbed = new Discord.MessageEmbed()
+const modoEmbed = new MessageEmbed()
 	.setColor('#00BDFF')
 	.setTitle('⚒ ・Liste des commandes de modération.')
 	.setURL('https://www.youtube.com/c/SOUKii')
@@ -17,7 +17,7 @@ const modoEmbed = new Discord.MessageEmbed()
     )
 	.setTimestamp()
     .setFooter(config.Speudo, config.Image);
-    message.channel.send(modoEmbed)
+    message.channel.send({ embeds : [modoEmbed] })
 }
 
 module.exports.help = {
