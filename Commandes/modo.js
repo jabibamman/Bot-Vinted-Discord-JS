@@ -10,10 +10,8 @@ const modoEmbed = new MessageEmbed()
 	.setThumbnail(config.Image)
 	.addFields(
     { name: '🗑-clear', value: '(Pour supprimer des messages.)' },
-	{ name: '💬-msg', value: '(Pour envoyer un message avec le bot.)' },
     { name: '⚠️-kick', value: '(Pour kick.)' },
     { name: '❌-ban', value: '(Pour ban.)' },
-
     )
 	.setTimestamp()
     .setFooter(config.Speudo, config.Image);

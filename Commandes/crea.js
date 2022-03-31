@@ -1,14 +1,14 @@
-const Discord = require('discord.js');
+const {MessageEmbed} = require('discord.js');
 
 module.exports.run = async(client, message, args) => {
 message.delete()
-const creaEmbed = new Discord.MessageEmbed()
+const creaEmbed = new MessageEmbed()
     .setAuthor(message.author.username)
     .setColor("#00BDFF")
     .setDescription("Voici la date de création de ton compte discord !")
     .addField("⬇️⬇️", message.author.createdAt);
 
-message.channel.send(creaEmbed);
+message.channel.send({embeds: [creaEmbed]});
 }
 
 module.exports.help = {

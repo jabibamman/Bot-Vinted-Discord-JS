@@ -6,8 +6,8 @@ message.delete()
 const cmdEmbed = new Discord.MessageEmbed()
 	.setColor(config.color)
 	.setTitle('🔗・Voici les liens me concernant.')
-	.setURL('https://www.youtube.com/c/SOUKii')
-	.setAuthor(config.Speudo, config.Image, 'https://www.youtube.com/c/SOUKii')
+	.setURL('https://www.youtube.com/')
+	.setAuthor(config.Speudo, config.Image, 'https://www.youtube.com/')
 	.setThumbnail(config.Image)
 	.addFields(
     { name: 'Youtube', value: config.Youtube },

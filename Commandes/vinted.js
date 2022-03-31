@@ -1,7 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 
-plpk
-
 module.exports.run = async(client, message, args) => {
     message.delete()
     // TODO récupérer la conditions des articles...
