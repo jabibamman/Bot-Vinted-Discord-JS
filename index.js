@@ -1,4 +1,4 @@
-﻿const { Client, Intents, Collection, MessageEmbed} = require('discord.js');
+﻿const { Client, Intents, Collection } = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
 
@@ -7,8 +7,6 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 
 client.commands = new Collection();
-
-var prefix = config.prefix;
 
 fs.readdir('./Commandes/', (error, f) => {
     if (error) { return console.error(error); }

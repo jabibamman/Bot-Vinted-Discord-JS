@@ -1,6 +1,5 @@
 const {MessageEmbed} = require("discord.js");
 const config = require("../config.json");
-var prefix = config.prefix;
 
 function wait(ms){
     var start = new Date().getTime()
