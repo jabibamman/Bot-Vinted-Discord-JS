@@ -19,10 +19,10 @@ module.exports.run = async (client, message, args) => {
     if(!reason) {const fail = await message.channel.send("Vous n'avez pas fait la raison"); wait(3000); fail.delete(); return}
 
     const kickchannel = new MessageEmbed()
-    .setAuthor(user.username +' a été kick', 'https://cdn.discordapp.com/attachments/721621182285348884/722839199690129458/Tryade_Termine_BD.png')
+    .setTitle(user.username +' a été kick', 'https://cdn.discordapp.com/attachments/721621182285348884/722839199690129458/Tryade_Termine_BD.png')
     .setColor(config.embedColor)
     .addField('Raison', `${reason}`, true)
-    .setFooter(`Kick de ${message.author.tag}`, message.author.displayAvatarURL());
+    .setFooter({ text : `Kick de ${message.author.tag}`, iconURL: message.author.displayAvatarURL()});
 
     message.channel.send({embeds: [kickchannel]})
     guild.members.kick(user, reason)
