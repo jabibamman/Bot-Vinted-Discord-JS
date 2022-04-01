@@ -9,7 +9,7 @@ module.exports.run = async(client, message, args) => {
     price_to = args[4]
 
     message.delete()
-    // TODO récupérer la conditions des articles...
+
     switch (args[0].toUpperCase()) {
         case 'NIKE': brand_id = config.brand[0].id; break;
         case 'ADIDAS': brand_id = config.brand[1].id; break;
@@ -45,12 +45,14 @@ module.exports.run = async(client, message, args) => {
     }
 
     switch (args[1].toUpperCase()) {
+        // Tailles
         case 'XS': size_id = config.size[0].id; break;
         case 'S': size_id = config.size[1].id; break;
         case 'M': size_id = config.size[2].id; break;
         case 'L': size_id = config.size[3].id; break;
         case 'XL': size_id = config.size[4].id; break;
         case 'XXL': size_id = config.size[5].id; break;
+        // Pointures
         case '38': size_id = config.size[6].id; break;
         case '39': size_id = config.size[7].id; break;
         case '40': size_id = config.size[8].id; break;
@@ -65,7 +67,65 @@ module.exports.run = async(client, message, args) => {
 
     }
 
-    console.log(args[2] + ' ' + args[3] + ' ' + args[4])
+    // Créer le rôle ayant pour nom la marque
+    let role = message.guild.roles.cache.find(r => r.name === args[0].toUpperCase());
+    // Si le role n'existe pas, on le crée
+    if (!role) {
+        role = await message.guild.roles.create(
+        {
+                name: args[0].toUpperCase(),
+                color: 'RANDOM',
+                permissions: ['0']
+        });
+    }
+
+    // Vérifier si l'user à le role et sinon lui rajouter
+    if (!message.member.roles.cache.has(role.id)) {
+        await message.member.roles.add(role);
+    }
+
+    // Créer la catégorie moniteur personnalisé
+    let category = message.guild.channels.cache.find(c => c.name === 'moniteur personnalisé');
+    if (!category) {
+        category = await message.guild.channels.create('moniteur personnalisé',
+            {
+                type: 'GUILD_CATEGORY',
+                permissionOverwrites: [
+                    {
+                        id: message.guild.roles.everyone.id,
+                        deny: ['VIEW_CHANNEL']
+                    },
+                    {
+                        id: role.id,
+                        allow: ['VIEW_CHANNEL']
+                    }
+                ]
+
+            });
+    }
+
+    // Le channel est visible seulement s'il a le role
+    let channelPerso = message.guild.channels.cache.find(channel => channel.name === args[0]);
+    if (!channelPerso) {
+        channelPerso = await message.guild.channels.create(args[0].toUpperCase(), {
+            type: 'text',
+            permissionOverwrites: [
+                {
+                    id: message.guild.roles.everyone.id,
+                    deny: ['VIEW_CHANNEL']
+                },
+                {
+                    id: role.id,
+                    allow: ['VIEW_CHANNEL']
+                }
+            ]
+        });
+    }
+    // Affecter le channelPerso à la catégorie
+    await channelPerso.setParent(category.id);
+
+    // console.log(args[2] + ' ' + args[3] + ' ' + args[4]) // DEBUG : Affiche les arguments
+
     let lien = `https://www.vinted.fr/vetements?search_text=${args[2]}&brand_id[]=${brand_id}&order=newest_first&price_from=${price_from}&currency=EUR&price_to=${price_to}&size_id[]=${size_id}`;
     vinted.search(lien).then((posts) => {
         posts.items.forEach(product => {
@@ -91,13 +151,11 @@ module.exports.run = async(client, message, args) => {
                 .setTimestamp()
                 .setFooter({ text: 'By Jamessss', iconURL: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` });
 
-            const channel = client.channels.cache.find(ch => ch.name === 'free-moniteur');
-            channel.send({embeds: [creaEmbed] });
+            //const channel = client.channels.cache.find(ch => ch.name === 'free-moniteur');
+            channelPerso.send({embeds: [creaEmbed] });
 
             // vinted
-            console.log (product);
-
-
+            //console.log (product);
 
             });
 
