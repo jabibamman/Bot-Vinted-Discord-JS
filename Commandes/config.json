@@ -6,5 +6,185 @@
     "Twitch": "https://www.twitch.tv/ipsum",
     "Tiktok": "https://www.tiktok.com/fr/",
     "Twitter": "https://twitter.com/dolor",
-    "Insta": "https://www.instagram.com/?hl=fr"
+    "Insta": "https://www.instagram.com/?hl=fr",
+    "size": [
+        {
+            "id": "206",
+            "name": "XS"
+        },
+        {
+            "id": "207",
+            "name": "S"
+        },
+        {
+            "id": "208",
+            "name": "M"
+        },
+        {
+            "id": "209",
+            "name": "L"
+        },
+        {
+            "id": "210",
+            "name": "XL"
+        },
+        {
+            "id": "211",
+            "name": "XXL"
+        },
+
+        {
+            "id": "776",
+            "name": "38"
+        },
+        {
+            "id": "778",
+            "name": "39"
+        },
+        {
+            "id": "780",
+            "name": "40"
+        },
+        {
+            "id": "782",
+            "name": "41"
+        },
+        {
+            "id": "784",
+            "name": "42"
+        },
+        {
+            "id": "785",
+            "name": "42.5"
+        },
+        {
+            "id": "786",
+            "name": "43"
+        },
+        {
+            "id": "787",
+            "name": "43.5"
+        },
+        {
+            "id": "788",
+            "name": "44"
+        },
+        {
+            "id": "789",
+            "name": "44.5"
+        },
+        {
+            "id": "790",
+            "name": "45"
+        }
+    ],
+    "brand":[
+        {
+            "id": "53",
+            "name": "Nike"
+        },
+        {
+            "id": "14",
+            "name": "Adidas"
+        },
+        {
+            "id": "304",
+            "name": "Lacoste"
+        },
+        {
+            "id": "88",
+            "name": "Ralph Lauren"
+        },
+        {
+            "id": "94",
+            "name": "Tommy Hilfiger"
+        },
+        {
+            "id": "10",
+            "name": "Levis"
+        },
+        {
+            "id": "535",
+            "name": "Puma"
+        },
+        {
+            "id": "162",
+            "name": "Reebok"
+        },
+        {
+            "id": "1775",
+            "name": "New Balance"
+        },
+        {
+            "id": "1195",
+            "name": "Asics"
+        },
+        {
+            "id": "139",
+            "name": "Vans"
+        },
+        {
+            "id": "11445",
+            "name": "Converse"
+        },
+        {
+            "id": "12",
+            "name": "Zara"
+        },
+        {
+            "id": "161",
+            "name": "Diesel"
+        },
+        {
+            "id": "567",
+            "name": "Gucci"
+        },
+        {
+            "id": "5930015",
+            "name": "Armani"
+        },
+        {
+            "id": "2293",
+            "name": "Versace"
+        },
+        {
+            "id": "3573",
+            "name": "Prada"
+        },
+        {
+            "id": "1189",
+            "name": "Fendi"
+        },
+        {
+            "id": "5928803",
+            "name": "Valentino"
+        },
+        {
+            "id": "2319",
+            "name": "The North Face"
+        },
+        {
+            "id": "364",
+            "name": "Burberry"
+        },
+        {
+            "id": "73306",
+            "name": "Stone Island"
+        },
+        {
+            "id": "170880",
+            "name": "Off-White"
+        },
+        {
+            "id": "14969",
+            "name": "Supreme"
+        },
+        {
+            "id": "337802",
+            "name": "Travis Scott"
+        },
+        {
+            "id": "115490",
+            "name": "Yeezy"
+        }]
 }

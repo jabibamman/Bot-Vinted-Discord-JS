@@ -2,87 +2,71 @@ const { MessageEmbed } = require('discord.js');
 
 const vinted = require('vinted-api');
 
+const config = require('./config.json');
 module.exports.run = async(client, message, args) => {
+    let brand_id, size_id, price_from, price_to;
+    price_from = args[3]
+    price_to = args[4]
+
     message.delete()
     // TODO récupérer la conditions des articles...
-    let brand_id, size_id;
-
-    let brand = [
-        {
-            id: '53',
-            name: 'nike'
-        },
-        {
-            id: '14',
-            name: 'adidas'
-        },
-        {
-            id: '304',
-            name: 'lacoste'
-        },
-        {
-            id: '88',
-            name: 'ralph lauren'
-        },
-        {
-            id: '94',
-            name: 'tommy hilfiger'
-        },
-        {
-            id: '10',
-            name: 'levis'
-        },
-
-    ]
-
-    let size = [
-        {
-            id: '206',
-            name: 'XS'
-        },
-        {
-            id: '207',
-            name: 'S'
-        },
-        {
-            id: '208',
-            name: 'M'
-        },
-        {
-            id: '209',
-            name: 'L'
-        },
-        {
-            id: '210',
-            name: 'XL'
-        },
-        {
-            id: '211',
-            name: 'XXL'
-        }
-        ]
-
-
-
     switch (args[0].toUpperCase()) {
-        case 'NIKE': brand_id = brand[0].id; break;
-        case 'ADIDAS': brand_id = brand[1].id; break;
-        case 'LACOSTE': brand_id = brand[2].id; break;
-        case 'RALPH LAUREN': brand_id = brand[3].id; break;
-        case 'TOMMY HILFIGER': brand_id = brand[4].id; break;
-        case 'LEVIS': brand_id = brand[5].id; break;
+        case 'NIKE': brand_id = config.brand[0].id; break;
+        case 'ADIDAS': brand_id = config.brand[1].id; break;
+        case 'LACOSTE': brand_id = config.brand[2].id; break;
+        case 'RALPH LAUREN': brand_id = config.brand[3].id; break;
+        case 'TOMMY HILFIGER': brand_id = config.brand[4].id; break;
+        case 'LEVIS': brand_id = config.brand[5].id; break;
+        case 'PUMA': brand_id = config.brand[6].id; break;
+        case 'REEBOK': brand_id = config.brand[7].id; break;
+        case 'NEW BALANCE': brand_id = config.brand[8].id; break;
+        case 'ASICS': brand_id = config.brand[9].id; break;
+        case 'VANS': brand_id = config.brand[10].id; break;
+        case 'CONVERSE': brand_id = config.brand[11].id; break;
+        case 'ZARA': brand_id = config.brand[12].id; break;
+        case 'DIESEL': brand_id = config.brand[13].id; break;
+        case 'GUCCI': brand_id = config.brand[14].id; break;
+        case 'ARMANI': brand_id = config.brand[15].id; break;
+        case 'VERSACE': brand_id = config.brand[16].id; break;
+        case 'PRADA': brand_id = config.brand[17].id; break;
+        case 'FENDI': brand_id = config.brand[18].id; break;
+        case 'VALENTINO': brand_id = config.brand[9].id; break;
+        case 'THE NORTH FACE': brand_id = config.brand[10].id; break;
+        case 'BURBERRY': brand_id = config.brand[11].id; break;
+        case 'STONE ISLAND': brand_id = config.brand[12].id; break;
+        case 'OFF-WHITE': brand_id = config.brand[13].id; break;
+        case 'SUPREME': brand_id = config.brand[14].id; break;
+        case 'TRAVIS SCOTT': brand_id = config.brand[15].id; break;
+        case 'YEEZY': brand_id = config.brand[16].id; break;
+        default:
+            message.channel.send(`${message.author}, merci de préciser une marque de chaussures valide.`);
+            break;
+
     }
 
     switch (args[1].toUpperCase()) {
-        case 'XS': size_id = size[0].id; break;
-        case 'S': size_id = size[1].id; break;
-        case 'M': size_id = size[2].id; break;
-        case 'L': size_id = size[3].id; break;
-        case 'XL': size_id = size[4].id; break;
-        case 'XXL': size_id = size[5].id; break;
+        case 'XS': size_id = config.size[0].id; break;
+        case 'S': size_id = config.size[1].id; break;
+        case 'M': size_id = config.size[2].id; break;
+        case 'L': size_id = config.size[3].id; break;
+        case 'XL': size_id = config.size[4].id; break;
+        case 'XXL': size_id = config.size[5].id; break;
+        case '38': size_id = config.size[6].id; break;
+        case '39': size_id = config.size[7].id; break;
+        case '40': size_id = config.size[8].id; break;
+        case '41': size_id = config.size[9].id; break;
+        case '42': size_id = config.size[10].id; break;
+        case '42.5': size_id = config.size[11].id; break;
+        case '43': size_id = config.size[12].id; break;
+        case '43.5': size_id = config.size[13].id; break;
+        case '44': size_id = config.size[14].id; break;
+        case '44.5': size_id = config.size[15].id; break;
+        case '45': size_id = config.size[16].id; break;
+
     }
 
-    let lien = `https://www.vinted.fr/vetements?brand_id[]=${brand_id}&order=newest_first&price_from=0&currency=EUR&price_to=10&size_id[]=${size_id}`;
+    console.log(args[2] + ' ' + args[3] + ' ' + args[4])
+    let lien = `https://www.vinted.fr/vetements?search_text=${args[2]}&brand_id[]=${brand_id}&order=newest_first&price_from=${price_from}&currency=EUR&price_to=${price_to}&size_id[]=${size_id}`;
     vinted.search(lien).then((posts) => {
         posts.items.forEach(product => {
 

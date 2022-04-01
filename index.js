@@ -1,6 +1,7 @@
-﻿const { Client, Intents, Collection } = require('discord.js');
+﻿const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
+const configProduit = require('./Commandes/config.json');
 
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -39,39 +40,48 @@ client.on('guildMemberAdd', member => {
     if (!channel) return;
     channel.send(`Bienvenue ${member} sur le serveur !`);
 });
+/*
+ client.on('messageCreate', message =>{
 
-// client.on('messageCreate', message =>{
-//
-//     // Si l'identifiant du channel est égal à 959146840085909555 alors envoie un message
-//     if(message.channel.id === '959146840085909555'){
-//
-//         const creaEmbed = new MessageEmbed()
-//             .setColor('#0099ff')
-//             .setTitle("Comment utiliser le bot ?")
-//             .setAuthor({ name: "vMoniteur", iconURL:  `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` })
-//             .setDescription('Il suffit de choisir une marque si dessous et d\'utiliser la commande : ')
-//             .addField('`!vinted votre_marque taille type_produit`',  '\u200b', false)
-//             .addFields(
-//                 { name: '- Nike', value: '\u200b', inline: false },
-//                 { name: '- Adidas', value: '\u200b', inline: false },
-//                 { name: '- Lacoste', value: '\u200b', inline: false },
-//                 { name: '- Ralph Lauren', value: '\u200b', inline: false },
-//                 { name: '- Tommy Hilfiger', value: '\u200b',inline: false },
-//                 { name: '- Levis', value: '\u200b'}
-//
-//             )
-//             .setThumbnail( `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=2048`)
-//
-//             .setTimestamp()
-//             .setFooter({ text: 'By Jamessss', iconURL: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` });
-//
-//         const channel = client.channels.cache.find(ch => ch.name === 'config-moniteur');
-//         channel.send({embeds: [creaEmbed] });
-//
-//
-//
-//     }
-// });
+     // Si l'identifiant du channel est égal à 959146840085909555 alors envoie un message
+     if(message.channel.id === '959146840085909555'){
+
+         const creaEmbed = new MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle("Comment utiliser le bot ?")
+             .setAuthor({ name: "vMoniteur", iconURL:  `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` })
+             .setDescription('Il suffit de choisir une marque si dessous et d\'utiliser la commande : ')
+             .addField('`!vinted votre_marque votre_taille type_produit prix_min prix_max`',  '\u200b', false)
+             .addFields(
+                 { name: '- ' + configProduit.brand[0].name, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[1].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[2].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[3].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[4].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[5].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[6].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[7].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[8].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[9].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[10].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[11].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[12].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[13].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[14].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[15].name}`, value: '\u200b', inline: false },
+                 { name: `- ${configProduit.brand[16].name}`, value: '\u200b', inline: false }
+             )
+             .setThumbnail( `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=2048`)
+
+             .setTimestamp()
+             .setFooter({ text: 'By Jamessss', iconURL: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` });
+
+         const channel = client.channels.cache.find(ch => ch.name === 'config-moniteur');
+         channel.send({embeds: [creaEmbed] });
+    }
+ });
+*/
+
 
 
 
