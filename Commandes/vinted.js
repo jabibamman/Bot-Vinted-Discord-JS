@@ -1,14 +1,21 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageButton, MessageActionRow} = require('discord.js');
 
 const vinted = require('vinted-api');
 
 const config = require('./config.json');
 module.exports.run = async(client, message, args) => {
-    let brand_id, size_id, price_from, price_to;
-    price_from = args[3]
-    price_to = args[4]
+    let brand_id, size_id, price_from, price_to, search_text;
+    search_text = args[2] ? args[2] : "";
+    price_from = args[3] ? args[3] : 0;
+    price_to = args[4] ? args[4] : 1000000;
+
+    if(!args[1]) {args[1] = ''}
 
     message.delete()
+
+    if(message.channel.id !== config.channel_id) {
+        return message.channel.send("Vous devez être dans le channel #vinted pour utiliser cette commande.")
+    }
 
     switch (args[0].toUpperCase()) {
         case 'NIKE': brand_id = config.brand[0].id; break;
@@ -39,7 +46,7 @@ module.exports.run = async(client, message, args) => {
         case 'TRAVIS SCOTT': brand_id = config.brand[15].id; break;
         case 'YEEZY': brand_id = config.brand[16].id; break;
         default:
-            message.channel.send(`${message.author}, merci de préciser une marque de chaussures valide.`);
+            return message.channel.send(`${message.author}, merci de préciser une marque valide.`);
             break;
 
     }
@@ -65,6 +72,10 @@ module.exports.run = async(client, message, args) => {
         case '44.5': size_id = config.size[15].id; break;
         case '45': size_id = config.size[16].id; break;
 
+        default:
+            size_id = 0;
+            break;
+
     }
 
     // Créer le rôle ayant pour nom la marque
@@ -73,9 +84,9 @@ module.exports.run = async(client, message, args) => {
     if (!role) {
         role = await message.guild.roles.create(
         {
-                name: args[0].toUpperCase(),
-                color: 'RANDOM',
-                permissions: ['0']
+                "name": args[0].toUpperCase(),
+                "color": 'RANDOM',
+                "permissions": ['0']
         });
     }
 
@@ -89,15 +100,15 @@ module.exports.run = async(client, message, args) => {
     if (!category) {
         category = await message.guild.channels.create('moniteur personnalisé',
             {
-                type: 'GUILD_CATEGORY',
-                permissionOverwrites: [
+                "type": 'GUILD_CATEGORY',
+                "permissionOverwrites": [
                     {
-                        id: message.guild.roles.everyone.id,
-                        deny: ['VIEW_CHANNEL']
+                        "id": message.guild.roles.everyone.id,
+                        "deny": ['VIEW_CHANNEL']
                     },
                     {
-                        id: role.id,
-                        allow: ['VIEW_CHANNEL']
+                        "id": role.id,
+                        "allow": ['VIEW_CHANNEL']
                     }
                 ]
 
@@ -108,15 +119,15 @@ module.exports.run = async(client, message, args) => {
     let channelPerso = message.guild.channels.cache.find(channel => channel.name === args[0]);
     if (!channelPerso) {
         channelPerso = await message.guild.channels.create(args[0].toUpperCase(), {
-            type: 'text',
-            permissionOverwrites: [
+            "type": 'text',
+            "permissionOverwrites": [
                 {
-                    id: message.guild.roles.everyone.id,
-                    deny: ['VIEW_CHANNEL']
+                    "id": message.guild.roles.everyone.id,
+                    "deny": ['VIEW_CHANNEL']
                 },
                 {
-                    id: role.id,
-                    allow: ['VIEW_CHANNEL']
+                    "id": role.id,
+                    "allow": ['VIEW_CHANNEL']
                 }
             ]
         });
@@ -125,34 +136,63 @@ module.exports.run = async(client, message, args) => {
     await channelPerso.setParent(category.id);
 
     // console.log(args[2] + ' ' + args[3] + ' ' + args[4]) // DEBUG : Affiche les arguments
+    let lien = `https://www.vinted.fr/vetements?search_text=${search_text}&brand_id[]=${brand_id}&order=newest_first&price_from=${price_from}&currency=EUR&price_to=${price_to}&size_id[]=${size_id}`;
 
-    let lien = `https://www.vinted.fr/vetements?search_text=${args[2]}&brand_id[]=${brand_id}&order=newest_first&price_from=${price_from}&currency=EUR&price_to=${price_to}&size_id[]=${size_id}`;
+    if (size_id === 0) {
+        lien = lien.substring(0, lien.length - 12);
+    }
+    console.log (lien); // DEBUG : Affiche le lien
     vinted.search(lien).then((posts) => {
         posts.items.forEach(product => {
+
+            console.log (product)
+            const btnLien = new MessageButton()
+                .setStyle("LINK")
+                .setURL(product.url)
+                .setLabel("Voir Annonce")
+                .setDisabled(false)
+
+            const btnVendeur= new MessageButton()
+                .setStyle("LINK")
+                .setURL(product.user.profile_url)
+                .setLabel("Vendeur")
+                .setDisabled(false)
+
+            const btnAcheter = new MessageButton()
+                .setStyle("LINK")
+                .setURL("https://www.vinted.fr/transaction/buy/new?source_screen=item&transaction%5Bitem_id%5D=" + product.id)
+                .setLabel("Acheter")
+                .setDisabled(false)
+
+
+            const row = new MessageActionRow().addComponents([btnLien, btnVendeur, btnAcheter]);
+
 
 
             const creaEmbed = new MessageEmbed()
                 .setColor('#0099ff')
                 .setTitle(product.title)
                 .setURL(product.url)
-                .setAuthor({ name: product.brand_title, iconURL: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256`, url: product.url })
+                .setAuthor({ "name": "Vinted Moniteur | Prenium", "iconURL": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256`, "url": product.url })
                 .addFields(
-                    { name: 'Taille', value: product.size_title + '\u200b', inline: true },
-                          { name: 'Marque', value: product.brand_title, inline: true },
-                          { name: 'Prix', value: product.price.substring(0, product.price.length-2)+" €", inline: true },
-                         { name: '\u200B', value: '\u200B' },
-                       { name: 'Condition', value: product.brand_title, inline: true },
-                    { name: 'Vendeur', value: product.user.login+"\u200b" }
+                    { "name": 'Taille', "value": product.size_title + '\u200b', "inline": true },
+                          { "name": 'Marque', "value": product.brand_title, "inline": true },
+                          { "name": 'Prix', "value": product.price.substring(0, product.price.length-2)+" €", "inline": true },
+                          { "name": 'Vendeur', "value": product.user.login+"\u200b" }
                 )
-
-                .setThumbnail(`https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256`)
 
                 .setImage(product.photo.url)
                 .setTimestamp()
-                .setFooter({ text: 'By Jamessss', iconURL: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` });
+                .setFooter({ "text": 'By Jamessss', "iconURL": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` });
 
-            //const channel = client.channels.cache.find(ch => ch.name === 'free-moniteur');
-            channelPerso.send({embeds: [creaEmbed] });
+
+
+            // Send the message and the button
+            channelPerso.send(
+                {
+                    "embeds": [creaEmbed], "components": [row]
+                });
+
 
             // vinted
             //console.log (product);
@@ -168,5 +208,5 @@ module.exports.run = async(client, message, args) => {
 }
 
 module.exports.help = {
-    name:"vinted"
+    "name":"vinted"
 }
