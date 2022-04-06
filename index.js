@@ -1,8 +1,6 @@
 ﻿const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
-const configProduit = require('./Commandes/config.json');
-
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
@@ -85,74 +83,52 @@ client.on('guildMemberAdd', member => {
 
 
 
-client.on('messageCreate', message =>{
+client.on('message', message =>{
+    let logVinted = message.guild.channels.cache.find(c => c.name === 'log-vmoniteur');
+
     if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "bonjour"){
-      message.channel.send('Bonjour !')
+    switch (message.content.toLowerCase()) {
+        case "bonjour":
+            message.channel.send("Bonjour!");
+            break;
+
+        case "bonsoir":
+            message.channel.send("Soir Bon !");
+            break;
+
+        case "salut":
+            message.channel.send("Salutation !");
+            break;
+
+        case "comment ca va ?":
+            message.channel.send("Bien et vous ?");
+            break;
+
+        case "bien":
+            message.channel.send("ok.");
+            break;
+
+        // Insulte
+        case "tg":
+            message.channel.send("Oh les insultes !");
+            break;
+
+        case "ton daron":
+            message.channel.send("Ton gros daron mon reuf !");
+            break;
+
+        case "ftg":
+            message.channel.send("ta grand mère je lui met 4 coup de couteau gros chien");
+            break;
     }
-  })
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "bonsoir"){
-      message.channel.send('Soir Bon !')
-    }
-  })
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "salut"){
-      message.channel.send('Salutation !')
-    }
-  })
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "comment ca va ?"){
-      message.channel.send('Bien et vous ? ')
-    }
-  })
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "comment ca va"){
-      message.channel.send('Bien et vous ? ')
-    }
-  })
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "bien"){
-      message.channel.send('ok')
-    }
-  })
-  
-  
-  //// insulte
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "tg"){
-      message.reply('Ow les insultes !')
-    }
-  })
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "fdp"){
-      message.reply('Ta grand mère je lui met 4 coup de couteaux !')
-    }
-  }) 
-  
-  client.on('messageCreate', message =>{
-    if(!message.guild || message.author.bot === true) return;
-    if(message.content.toLowerCase() === "ftg"){
-      message.reply('Ow les insultes !')
-    }
+    if(message.content[0] === "!") {
+        // afficher le channel ou l'user a envoyé le message
 
 
-    client.on('disconnected', () => {
-        console.log('Bot disconnected');
 
-    });
-  });
+
+        logVinted.send("`"+message.author.username +"` a utilisé la commande `"+  message.content +"` dans le salon `" +  message.channel.name +"` le " + message.createdAt.getDate()+ "/"+message.createdAt.getUTCMonth()+"/"+message.createdAt.getFullYear()+" à " + message.createdAt.getHours()+":"+message.createdAt.getMinutes()+":"+message.createdAt.getSeconds()+".");
+
+    }
+});
+

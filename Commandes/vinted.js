@@ -148,6 +148,7 @@ module.exports.run = async(client, message, args) => {
             ]
         });
     }
+
     // Affecter le channelPerso à la catégorie
     await channelPerso.setParent(category.id);
 
@@ -158,8 +159,8 @@ module.exports.run = async(client, message, args) => {
     if (size_id === 0) {
         lien = lien.substring(0, lien.length - 12);
     }
-    console.log (lien); // DEBUG : Affiche le lien
 
+    console.log (lien); // DEBUG : Affiche le lien
     vinted.search(lien).then((posts) => {
         posts.items.forEach(product => {
             const btnLien = new MessageButton()
