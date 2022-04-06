@@ -185,29 +185,29 @@ module.exports.run = async(client, message, args) => {
 
 
 
-            // const creaEmbed = new MessageEmbed()
-            //     .setColor('#0099ff')
-            //     .setTitle(product.title)
-            //     .setURL(product.url)
-            //     .setAuthor({ "name": "Vinted Moniteur | Prenium", "iconURL": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256`, "url": product.url })
-            //     .addFields(
-            //         { "name": 'Taille', "value": product.size_title + '\u200b', "inline": true },
-            //               { "name": 'Marque', "value": product.brand_title, "inline": true },
-            //               { "name": 'Prix', "value": product.price.substring(0, product.price.length-2)+" €", "inline": true },
-            //               { "name": 'Vendeur', "value": product.user.login+"\u200b" }
-            //     )
-            //
-            //     .setImage(product.photo.url)
-            //     .setTimestamp()
-            //     .setFooter({ "text": 'By Jamessss', "iconURL": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` });
-            //
-            //
-            //
-            // // Send the message and the button
-            // channelPerso.send(
-            //     {
-            //         "embeds": [creaEmbed], "components": [row]
-            //     });
+            const creaEmbed = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle(product.title)
+                .setURL(product.url)
+                .setAuthor({ "name": "Vinted Moniteur | Prenium", "iconURL": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256`, "url": product.url })
+                .addFields(
+                    { "name": 'Taille', "value": product.size_title + '\u200b', "inline": true },
+                          { "name": 'Marque', "value": product.brand_title, "inline": true },
+                          { "name": 'Prix', "value": product.price.substring(0, product.price.length-2)+" €", "inline": true },
+                          { "name": 'Vendeur', "value": product.user.login+"\u200b" }
+                )
+
+                .setImage(product.photo.url)
+                .setTimestamp()
+                .setFooter({ "text": 'By Jamessss', "iconURL": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=256` });
+
+
+
+            // Send the message and the button
+            channelPerso.send(
+                {
+                    "embeds": [creaEmbed], "components": [row]
+                });
 
 
             // vinted
