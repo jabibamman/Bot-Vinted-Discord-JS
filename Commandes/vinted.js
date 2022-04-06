@@ -12,8 +12,7 @@ module.exports.run = async(client, message, args) => {
     price_to = args[4] ? args[4] : 1000000;
     // Si l'argument 0 est vide alors envoyer un message
     if(args[0] === undefined){
-
-        return message.channel.send("Veuillez entrer une marque");;
+        return message.channel.send(`${message.author},Veuillez entrer une marque`);
     }
 
     if(!args[1]) {args[1] = ''}

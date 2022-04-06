@@ -84,7 +84,7 @@ client.on('guildMemberAdd', member => {
 
 
 client.on('message', message =>{
-    let logVinted = message.guild.channels.cache.find(c => c.name === 'log-vmoniteur');
+    const logVinted = message.guild.channels.cache.find(c => c.name === 'log-vmoniteur');
 
     if(!message.guild || message.author.bot === true) return;
     switch (message.content.toLowerCase()) {
@@ -131,4 +131,15 @@ client.on('message', message =>{
 
     }
 });
+
+// Lorsqu'un message est effacer
+client.on('messageDelete', message => {
+    const logVinted = message.guild.channels.cache.find(c => c.name === 'log-vmoniteur');
+
+    if(!message.guild || message.author.bot === true) return;
+    if (message.content[0] !== "!") {
+        logVinted.send("`"+message.author.username +"` a effacé le message `"+  message.content +"` dans le salon `" +  message.channel.name +"` le " + message.createdAt.getDate()+ "/"+message.createdAt.getUTCMonth()+"/"+message.createdAt.getFullYear()+" à " + message.createdAt.getHours()+":"+message.createdAt.getMinutes()+":"+message.createdAt.getSeconds()+".");
+    }
+});
+
 
