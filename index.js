@@ -140,7 +140,7 @@ client.on('messageCreate', message =>{
   client.on('messageCreate', message =>{
     if(!message.guild || message.author.bot === true) return;
     if(message.content.toLowerCase() === "fdp"){
-      message.reply('Ow les insultes !')
+      message.reply('Ta grand mère je lui met 4 coup de couteaux !')
     }
   }) 
   
@@ -149,4 +149,10 @@ client.on('messageCreate', message =>{
     if(message.content.toLowerCase() === "ftg"){
       message.reply('Ow les insultes !')
     }
+
+
+    client.on('disconnected', () => {
+        console.log('Bot disconnected');
+
+    });
   });
