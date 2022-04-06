@@ -1,6 +1,6 @@
 {
   "name": "vmoniteur",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "Moniteur discord pour Vinted",
   "main": "index.js",
   "dependencies": {
