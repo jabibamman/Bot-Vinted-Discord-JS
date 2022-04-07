@@ -123,10 +123,6 @@ client.on('message', message =>{
     }
     if(message.content[0] === "!") {
         // afficher le channel ou l'user a envoyé le message
-
-
-
-
         logVinted.send("`"+message.author.username +"` a utilisé la commande `"+  message.content +"` dans le salon `" +  message.channel.name +"` le " + message.createdAt.getDate()+ "/"+message.createdAt.getUTCMonth()+"/"+message.createdAt.getFullYear()+" à " + message.createdAt.getHours()+":"+message.createdAt.getMinutes()+":"+message.createdAt.getSeconds()+".");
 
     }
@@ -134,11 +130,10 @@ client.on('message', message =>{
 
 // Lorsqu'un message est effacer
 client.on('messageDelete', message => {
-    const logVinted = message.guild.channels.cache.find(c => c.name === 'log-vmoniteur');
-
     if(!message.guild || message.author.bot === true) return;
     if (message.content[0] !== "!") {
-        logVinted.send("`"+message.author.username +"` a effacé le message `"+  message.content +"` dans le salon `" +  message.channel.name +"` le " + message.createdAt.getDate()+ "/"+message.createdAt.getUTCMonth()+"/"+message.createdAt.getFullYear()+" à " + message.createdAt.getHours()+":"+message.createdAt.getMinutes()+":"+message.createdAt.getSeconds()+".");
+        message.guild.channels.cache.find(c => c.name === 'log-vmoniteur')
+            .send("`"+message.author.username +"` a effacé le message `"+  message.content +"` dans le salon `" +  message.channel.name +"` le " + message.createdAt.getDate()+ "/"+message.createdAt.getUTCMonth()+"/"+message.createdAt.getFullYear()+" à " + message.createdAt.getHours()+":"+message.createdAt.getMinutes()+":"+message.createdAt.getSeconds()+".");
     }
 });
 

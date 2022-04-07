@@ -24,7 +24,7 @@ module.exports.run = async (client, message, args) => {
     .setFooter({ text : `Kick de ${message.author.tag}`, iconURL: message.author.displayAvatarURL()});
 
     message.channel.send({embeds: [kickchannel]})
-    guild.members.kick(user, reason)
+    await guild.members.kick (user, reason)
 };
 
 module.exports.help = {

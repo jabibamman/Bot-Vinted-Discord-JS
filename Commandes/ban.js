@@ -25,8 +25,8 @@ module.exports.run = async (client, message, args) => {
 
     message.channel.send({embeds: [kickchannel]})
 
-    user.send(`Vous avez été ban du serveur ${message.guild.name} pour la raison suivante : ${reason}`)
-    guild.members.ban(user, reason)
+    await user.send (`Vous avez été ban du serveur ${message.guild.name} pour la raison suivante : ${reason}`)
+    await guild.members.ban (user, reason)
 
 };
 
