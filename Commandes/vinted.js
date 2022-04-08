@@ -19,7 +19,7 @@ module.exports.run = async(client, message, args) => {
 
 
 
-    if(message.channel.id !== config.channel_id) {
+    if(message.channel.id !== config.vinted_id) {
         return message.channel.send("Vous devez être dans le channel #vinted pour utiliser cette commande.")
     }
 

@@ -32,6 +32,23 @@ fs.readdir('./Events/', (error, f) => {
 
 client.login(config.token);
 
+// Dès que le bot est ready
+client.on('ready', async () => {
+    // Rechercher le channel etat-bot
+    let channelPerso = client.channels.cache.find(channel => channel.name === 'etat-bot');
+
+        // On le clone
+        let channelEtat = await channelPerso.clone()
+
+        // On le envoie le message
+        channelEtat.send('🟢 Le BOT est `ON` !')
+
+
+        // L'ancien channel est supprimé
+        channelPerso.delete()
+
+});
+
 // envoyer un message lorsque la personne viens d'arriver
 client.on('guildMemberAdd', member => {
     const channel = member.guild.channels.cache.find(ch => ch.name === 'bienvenue');

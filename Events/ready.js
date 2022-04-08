@@ -8,12 +8,18 @@ module.exports = async (client, message) => {
 
     setInterval(function() {
         let statusstyle = [
+            '🟢 Le BOT est ON !',
             `${prefix}help`,
-            // `J'aime ${config.speudo}`
-            'faire ta daronne'
+            `${prefix}vinted`
         ]
         
         let status = statusstyle[Math.floor(Math.random() * statusstyle.length)];
-        client.user.setPresence({ activity: { name: status}, status: 'online' })
-    }, 5000)
+        client.user.setPresence({
+                activities: [
+                        {
+                            name: status,
+                            type: 'PLAYING'
+                        }]
+            })
+    }, 10000)
 };

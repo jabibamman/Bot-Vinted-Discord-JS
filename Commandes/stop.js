@@ -14,8 +14,9 @@ module.exports.run = async(client, message, args) => {
 
 
     // Delete old channel
-    channelPerso.delete()
+    await channelPerso.delete()
 
+    // On déconnecte le bot
     process.exit(0);
 
 

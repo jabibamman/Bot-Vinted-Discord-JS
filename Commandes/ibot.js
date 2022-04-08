@@ -11,8 +11,8 @@ const botinfoEmbed = new MessageEmbed()
       .setThumbnail(config.Image)
       .addFields(
           { name: '\u200B', value: '\u200B' },
-          { name: '✨ | Création :', value: '13/04/2021', inline: true },
-          { name: '⌨ | Développeur :', value: '!lorem.#1313', inline: true },
+          { name: '✨ | Création :', value: '13/03/2022', inline: true },
+          { name: '⌨ | Développeur :', value: 'Jamessss#7426', inline: true },
       )
       .addField('Présence :', `${client.guilds.cache.size} serveurs`,  true)
       .setTimestamp()
