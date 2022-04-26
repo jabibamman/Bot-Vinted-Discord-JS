@@ -194,5 +194,15 @@
     ],
     "vinted_id": "959146840085909555",
     "modo_id": "961903262531981342",
-    "role_admin": "A"
+    "role_admin": "A",
+    "catalog": [
+        {
+            "id": 1231,
+            "name": "Chaussures"
+        },
+        {
+            "id": 79,
+            "name": "Sweat & Pull"
+        }
+    ]
 }
