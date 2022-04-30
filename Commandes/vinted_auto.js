@@ -18,56 +18,110 @@ module.exports = {
         marques.forEach(function callback(marque, index) {
             switch (marque.toUpperCase()) {
                 case 'NIKE': // remplacer marque par config.brand[1].id ;
-                    marques.splice(index,1, '&brand_id[]='+config.brand[0].id); break;
-                case 'ADIDAS': marques.splice(index,1, '&brand_id[]='+'&brand_id[]='+config.brand[1].id); break;
-                case 'LACOSTE': marques.splice(index,1, '&brand_id[]='+config.brand[2].id); break;
-                case 'RALPH-LAUREN': marques.splice(index,1, '&brand_id[]='+config.brand[3].id); break;
-                case 'TOMMY-HILFIGER': marques.splice(index,1, '&brand_id[]='+config.brand[4].id); break;
-                case 'LEVIS': marques.splice(index,1, '&brand_id[]='+config.brand[5].id); break;
-                case 'PUMA': marques.splice(index,1, '&brand_id[]='+config.brand[6].id); break;
-                case 'REEBOK': marques.splice(index,1, '&brand_id[]='+config.brand[7].id); break;
-                case 'NEW-BALANCE': marques.splice(index,1, '&brand_id[]='+config.brand[8].id); break;
-                case 'ASICS': marques.splice(index,1, '&brand_id[]='+config.brand[9].id); break;
-                case 'VANS': marques.splice(index,1, '&brand_id[]='+config.brand[10].id); break;
-                case 'CONVERSE': marques.splice(index,1, '&brand_id[]='+config.brand[11].id); break;
-                case 'ZARA': marques.splice(index,1, '&brand_id[]='+config.brand[12].id); break;
-                case 'DIESEL': marques.splice(index,1, '&brand_id[]='+config.brand[13].id); break;
-                case 'GUCCI': marques.splice(index,1, '&brand_id[]='+config.brand[14].id); break;
-                case 'ARMANI': marques.splice(index,1, '&brand_id[]='+config.brand[15].id); break;
-                case 'VERSACE': marques.splice(index,1, '&brand_id[]='+config.brand[16].id); break;
-                case 'PRADA': marques.splice(index,1, '&brand_id[]='+config.brand[17].id); break;
-                case 'FENDI': marques.splice(index,1, '&brand_id[]='+config.brand[18].id); break;
-                case 'VALENTINO': marques.splice(index,1, '&brand_id[]='+config.brand[19].id); break;
-                case 'THE-NORTH-FACE': marques.splice(index,1, '&brand_id[]='+config.brand[20].id); break;
-                case 'BURBERRY': marques.splice(index,1, '&brand_id[]='+config.brand[21].id); break;
-                case 'STONE-ISLAND': marques.splice(index,1, '&brand_id[]='+config.brand[22].id); break;
-                case 'OFF-WHITE': marques.splice(index,1, '&brand_id[]='+config.brand[23].id); break;
-                case 'SUPREME': marques.splice(index,1, '&brand_id[]='+config.brand[24].id); break;
-                case 'TRAVIS-SCOTT': marques.splice(index,1, '&brand_id[]='+config.brand[25].id); break;
-                case 'YEEZY': marques.splice(index,1, '&brand_id[]='+config.brand[26].id); break;
-                case 'CARHARTT': marques.splice(index,1, '&brand_id[]='+config.brand[27].id); break;
-                default:
-                    return console.log(marque +' non reconnue');
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[0].id);
                     break;
-
+                case 'ADIDAS':
+                    marques.splice (index, 1, '&brand_id[]=' + '&brand_id[]=' + config.brand[1].id);
+                    break;
+                case 'LACOSTE':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[2].id);
+                    break;
+                case 'RALPH-LAUREN':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[3].id);
+                    break;
+                case 'TOMMY-HILFIGER':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[4].id);
+                    break;
+                case 'LEVIS':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[5].id);
+                    break;
+                case 'PUMA':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[6].id);
+                    break;
+                case 'REEBOK':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[7].id);
+                    break;
+                case 'NEW-BALANCE':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[8].id);
+                    break;
+                case 'ASICS':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[9].id);
+                    break;
+                case 'VANS':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[10].id);
+                    break;
+                case 'CONVERSE':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[11].id);
+                    break;
+                case 'ZARA':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[12].id);
+                    break;
+                case 'DIESEL':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[13].id);
+                    break;
+                case 'GUCCI':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[14].id);
+                    break;
+                case 'ARMANI':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[15].id);
+                    break;
+                case 'VERSACE':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[16].id);
+                    break;
+                case 'PRADA':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[17].id);
+                    break;
+                case 'FENDI':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[18].id);
+                    break;
+                case 'VALENTINO':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[19].id);
+                    break;
+                case 'THE-NORTH-FACE':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[20].id);
+                    break;
+                case 'BURBERRY':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[21].id);
+                    break;
+                case 'STONE-ISLAND':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[22].id);
+                    break;
+                case 'OFF-WHITE':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[23].id);
+                    break;
+                case 'SUPREME':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[24].id);
+                    break;
+                case 'TRAVIS-SCOTT':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[25].id);
+                    break;
+                case 'YEEZY':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[26].id);
+                    break;
+                case 'CARHARTT':
+                    marques.splice (index, 1, '&brand_id[]=' + config.brand[27].id);
+                    break;
+                default:
+                    return console.log (marque + ' non reconnue');
+                    break;
             }
         })
 
-
         switch (type1.toUpperCase()) {
             case 'SNKRS':
-                channel = client.channels.fetch(config.channel_free_snkrs)
+                channel = client.channels.cache.get(config.channel_free[0].id);
                 type1 ='&catalog[]='+config.catalog[0].id;
                 break;
             case 'PULL':
-                channel = client.channels.fetch(config.channel_free_adidas);
+                channel = client.channels.cache.get(config.channel_free[1].id);
                 type1 = '&catalog[]='+config.catalog[1].id;
                 break;
             default:
                 return console.log(type1 +' non reconnue');
                 break;
         }
-        
+
+
         let brand_id = "";
         marques.forEach(marque=>{
             brand_id += marque;
@@ -115,6 +169,7 @@ module.exports = {
 
 
                 // Send the message and the button
+
                 channel.send(
                     {
                         "embeds": [creaEmbed], "components": [row]

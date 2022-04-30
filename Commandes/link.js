@@ -20,7 +20,7 @@ const cmdEmbed = new Discord.MessageEmbed()
 	.setTimestamp()
 	.setFooter(config.Speudo, config.Image);
 
-  message.channel.send(cmdEmbed);
+  message.channel.send({ embeds: [cmdEmbed] });
 }
 module.exports.help = {
   name:"liens"

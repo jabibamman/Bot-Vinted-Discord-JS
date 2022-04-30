@@ -205,6 +205,14 @@
             "name": "Sweat & Pull"
         }
     ],
-    "channel_free_pull": 968459034296459264,
-    "channel_free_snkrs": 968459056631132191
+    "channel_free": [
+        {
+            "id": "968459056631132191",
+            "name": "Snkrs"
+        },
+        {
+            "id": "968459034296459264",
+            "name": "Pull"
+        }
+    ]
 }

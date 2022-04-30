@@ -160,6 +160,15 @@ module.exports.run = async(client, message, args) => {
     }
 
     console.log (lien); // DEBUG : Affiche le lien
+
+    // Recherche des produits D'Utilisateurs
+    // let lien2 = "https://www.vinted.fr/member/16461279-zelienvs"
+    // vinted.searchProductProfile(lien2).then((posts)=> {
+    //     posts.items.forEach(product => {
+    //         console.log(product);
+    //     });
+    // });
+
     vinted.search(lien).then((posts) => {
         posts.items.forEach(product => {
             const btnLien = new MessageButton()

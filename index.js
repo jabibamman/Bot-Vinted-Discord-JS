@@ -47,26 +47,31 @@ client.on('ready', async () => {
         // L'ancien channel est supprimé
         channelPerso.delete()
 
-    var checkminutes = 0.10, checkthe_interval = checkminutes * 60 * 1000; //This checks every 5 minutes, change 5 to whatever minute you'd like
+    // Automatisation du free-vinted toutes les 10 minutes
+    const checkminutes = 10, checkthe_interval = checkminutes * 60 * 1000; // This checks every 10 minutes, change 10 to whatever minute you'd like
     setInterval(function() {
         // Récupère la commande vinted
         let commande = client.commands.get('vinted_auto');
 
-        // Exécute la commande vinted (pull)
+        // Exécute la commande vinted (pull) )
         commande.execute(client, "nike","the-north-face", "carhartt", "lacoste", "ralph-lauren","tommy-hilfiger","0", "20", "pull");
         // Exécute la commande vinted (snkrs)
-        //commande.execute(client, "nike","new-balance", "adidas", "yeezy", "converse","travis-scott","0", "150", "snkrs");
+        commande.execute(client, "nike","new-balance", "adidas", "yeezy", "converse","travis-scott","0", "150", "snkrs");
 
     }, checkthe_interval);
 
 });
 
-// envoyer un message lorsque la personne viens d'arriver
+// envoyer un message lorsque la personne viens d'arriver // TODO : faire un message d'arrivée automatique, il ne fonctionne pas pour le moment.
 client.on('guildMemberAdd', member => {
+    console.log(`${member.user.username} vient d'arriver !`);
     const channel = member.guild.channels.cache.find(ch => ch.name === 'bienvenue');
     if (!channel) return;
-    channel.send(`Bienvenue ${member} sur le serveur !`);
+    member.send (`Bienvenue ${member} sur le serveur !`).then (r  =>
+        channel.send(`${member} vient d'arriver !`)
+    );
 });
+
 /*
  client.on('messageCreate', message =>{
 
@@ -147,7 +152,7 @@ client.on('message', message =>{
             break;
 
         case "ftg":
-            message.channel.send("ta grand mère je lui met 4 coup de couteau gros chien");
+            message.channel.send("Insulte ?!");
             break;
     }
     if(message.content[0] === "!") {
