@@ -47,15 +47,15 @@ client.on('ready', async () => {
         // L'ancien channel est supprimé
         channelPerso.delete()
 
-    var checkminutes = 5, checkthe_interval = checkminutes * 60 * 1000; //This checks every 5 minutes, change 5 to whatever minute you'd like
+    var checkminutes = 0.10, checkthe_interval = checkminutes * 60 * 1000; //This checks every 5 minutes, change 5 to whatever minute you'd like
     setInterval(function() {
         // Récupère la commande vinted
-        let commande = client.commands.get('vintede');
+        let commande = client.commands.get('vinted_auto');
 
         // Exécute la commande vinted (pull)
         commande.execute(client, "nike","the-north-face", "carhartt", "lacoste", "ralph-lauren","tommy-hilfiger","0", "20", "pull");
         // Exécute la commande vinted (snkrs)
-        commande.execute(client, "nike","new-balance", "adidas", "yeezy", "converse","travis-scott","0", "150", "snkrs");
+        //commande.execute(client, "nike","new-balance", "adidas", "yeezy", "converse","travis-scott","0", "150", "snkrs");
 
     }, checkthe_interval);
 
