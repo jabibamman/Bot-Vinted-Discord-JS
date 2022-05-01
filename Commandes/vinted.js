@@ -170,7 +170,7 @@ module.exports.run = async(client, message, args) => {
     // });
 
     vinted.search(lien).then((posts) => {
-        posts.items.forEach(product => {
+        posts.items.reverse().forEach(product => {
             const btnLien = new MessageButton()
                 .setStyle("LINK")
                 .setURL(product.url)

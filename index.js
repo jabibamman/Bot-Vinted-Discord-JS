@@ -4,7 +4,6 @@ const config = require('./config.json');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-
 client.commands = new Collection();
 
 fs.readdir('./Commandes/', (error, f) => {
@@ -55,6 +54,7 @@ client.on('ready', async () => {
 
         // Exécute la commande vinted (pull) )
         commande.execute(client, "nike","the-north-face", "carhartt", "lacoste", "ralph-lauren","tommy-hilfiger","0", "20", "pull");
+
         // Exécute la commande vinted (snkrs)
         commande.execute(client, "nike","new-balance", "adidas", "yeezy", "converse","travis-scott","0", "150", "snkrs");
 
@@ -117,7 +117,7 @@ client.on('guildMemberAdd', member => {
 
 
 
-client.on('message', message =>{
+client.on('messageCreate', message =>{
     const logVinted = message.guild.channels.cache.find(c => c.name === 'log-vmoniteur');
 
     if(!message.guild || message.author.bot === true) return;
