@@ -41,7 +41,7 @@ client.on('ready', async () => {
 
         // On le envoie le message
         channelEtat.send('🟢 Le BOT est `ON` !')
-
+        console.log(client.id + ' ' + client.avatar.id);
 
         // L'ancien channel est supprimé
         channelPerso.delete()

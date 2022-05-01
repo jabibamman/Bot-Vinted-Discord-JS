@@ -6,7 +6,7 @@ module.exports.run = async(client, message, args) => {
     // SI L'user n'est pas un admin
     if (!message.member.roles.cache.some(r => r.name === "A")) {return message.channel.send("Vous n'avez pas la permission de faire cette commande !"); }
 
-    channelPerso = await message.guild.channels.cache.find(channel => channel.name === 'etat-bot');
+    let channelPerso = await message.guild.channels.cache.find (channel => channel.name === 'etat-bot');
 
     // Clone channel
     const channelEtat = await channelPerso.clone()

@@ -132,6 +132,11 @@ module.exports = {
         vinted.search(lien).then((posts) => {
             // Ici je fais un foreach de posts reverse pour parcourir les posts de façon d'avoir les derniers posts en dernier (tout en bas du channel)
             posts.items.reverse().forEach(product => {
+                // Si !product.photo.url
+                if (!product.photo.url) {
+                    product.photo.url = "";
+                }
+
                 // Si product.title contient 'bot' alors on pass
                 if (product.title.toUpperCase().includes('BOT ')) {
                     console.log ('Product ' + product.title + ' contains "bot: "' + product.url);
@@ -164,7 +169,7 @@ module.exports = {
                         .setColor('#0099ff')
                         .setTitle(product.title)
                         .setURL(product.url)
-                        .setAuthor({ "name": "Vinted Moniteur | Prenium", "iconURL": `https://cdn.discordapp.com/avatars/${client.users.id}/${client.users.avatar}.png?size=256`, "url": product.url })
+                        .setAuthor({ "name": "Vinted Moniteur | Free", "iconURL": `https://cdn.discordapp.com/avatars/${client.users.id}/${client.users.avatar}.png?size=256`, "url": product.url })
                         .addFields(
                             { "name": 'Taille', "value": '```'+ product.size_title + '```'+ '\u200b', "inline": true },
                             { "name": 'Marque', "value": '```'+product.brand_title+ '```', "inline": true },

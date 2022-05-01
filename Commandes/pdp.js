@@ -4,7 +4,7 @@ module.exports.run = async(client, message, args) => {
         message.delete()
         let member = message.mentions.users.first() || message.author;
         const pdpEmbed = new MessageEmbed()
-            .setAuthor("Photo demandée par :")
+            .setAuthor({"name": "Photo demandé par :"})
             .setColor("#00BDFF")
             .setDescription(message.author.tag)
             .setImage(member.avatarURL())
