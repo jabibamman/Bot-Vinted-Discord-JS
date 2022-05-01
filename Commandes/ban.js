@@ -18,10 +18,10 @@ module.exports.run = async (client, message, args) => {
     if(!reason) {const fail = await message.channel.send("Vous n'avez pas fait la raison"); wait(3000); fail.delete(); return}
 
     const kickchannel = new MessageEmbed()
-    .setAuthor(user.username+' a été Ban', 'https://emoji.gg/assets/emoji/8501_BanHam.png')
+    .setAuthor({"name": user.username+' a été Ban', "iconURL": 'https://emoji.gg/assets/emoji/8501_BanHam.png'})
     .setColor(config.embedColor)
     .addField('Raison', `${reason}`, true)
-    .setFooter(`Ban de ${message.author.tag}`, message.author.displayAvatarURL());
+    .setFooter({"name": `Ban de ${message.author.tag}`, "iconURL": message.author.displayAvatarURL()});
 
     message.channel.send({embeds: [kickchannel]})
 

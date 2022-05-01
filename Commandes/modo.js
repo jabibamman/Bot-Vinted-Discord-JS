@@ -5,19 +5,14 @@ module.exports.run = async(client, message, args) => {
 	message.delete();
 
 	// Si l'utilisateur n'as pas le role A
-	if (!message.member.roles.cache.has(config.role_admin)) {
-		return message.channel.send(`Vous n'avez pas les permissions pour utiliser cette commande.`);
-	}
 
-	if(message.channel.id !== config.modo_id) {
-		return message.channel.reply("Vous devez être dans le channel #vinted pour utiliser cette commande.")
-	}
 
+	console.log (client.user.id + " " + client.user.avatar);
 const modoEmbed = new MessageEmbed()
 	.setColor('#00BDFF')
 	.setTitle('⚒ ・Liste des commandes de modération.')
 	.setURL('https://www.youtube.com/c/SOUKii')
-	.setAuthor(config.Speudo, config.Image, 'https://www.youtube.com/c/SOUKii')
+	.setAuthor({"name": config.Speudo, "iconURL": config.Image, "url": 'https://www.youtube.com/c/'})
 	.setThumbnail(config.Image)
 	.addFields(
     { name: '🗑-clear', value: '(Pour supprimer des messages.)' },
@@ -25,8 +20,9 @@ const modoEmbed = new MessageEmbed()
     { name: '❌!ban', value: '(Pour ban.)' },
 	{ name: '🔴!stop', value: '(Pour stopper le bot.)' },
     )
+	.setImage(config.Image)
 	.setTimestamp()
-    .setFooter(config.Speudo, config.Image);
+	.setFooter({ "text": 'By Jamessss#7426', "iconURL": `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=256` });
     message.channel.send({ embeds : [modoEmbed] })
 }
 

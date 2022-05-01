@@ -4,7 +4,7 @@ const vinted = require('vinted-api');
 
 const config = require('./config.json');
 module.exports = {
-    async execute(client, brand1, brand2, brand3, brand4, brand5, brand6, prix_min, prix_max, type1,  Discord) {
+    execute: async function (client, brand1, brand2, brand3, brand4, brand5, brand6, prix_min, prix_max, type1, Discord) {
         let marques = [
             brand1,
             brand2,
@@ -15,8 +15,8 @@ module.exports = {
         ]
         let channel;
 
-        marques.forEach(function callback(marque, index) {
-            switch (marque.toUpperCase()) {
+        marques.forEach (function callback(marque, index) {
+            switch (marque.toUpperCase ()) {
                 case 'NIKE': // remplacer marque par config.brand[1].id ;
                     marques.splice (index, 1, '&brand_id[]=' + config.brand[0].id);
                     break;
@@ -107,87 +107,98 @@ module.exports = {
             }
         })
 
-        switch (type1.toUpperCase()) {
+        switch (type1.toUpperCase ()) {
             case 'SNKRS':
-                channel = client.channels.cache.get(config.channel_free[0].id);
-                type1 ='&catalog[]='+config.catalog[0].id;
+                channel = client.channels.cache.get (config.channel_free[0].id);
+                type1 = '&catalog[]=' + config.catalog[0].id;
                 break;
             case 'PULL':
-                channel = client.channels.cache.get(config.channel_free[1].id);
-                type1 = '&catalog[]='+config.catalog[1].id;
+                channel = client.channels.cache.get (config.channel_free[1].id);
+                type1 = '&catalog[]=' + config.catalog[1].id;
                 break;
             default:
-                return console.log(type1 +' non reconnue');
+                return console.log (type1 + ' non reconnue');
                 break;
         }
 
 
         let brand_id = "";
-        marques.forEach(marque=>{
+        marques.forEach (marque => {
             brand_id += marque;
         })
-        
+
         let lien = `https://www.vinted.fr/vetements?search_text=${type1}${brand_id}&order=newest_first&price_from=${prix_min}&currency=EUR&price_to=${prix_max}${type1}`;
         // console.log(lien); // debug pour voir le lien
-        vinted.search(lien).then((posts) => {
+        vinted.search (lien).then ((posts) => {
             // Ici je fais un foreach de posts reverse pour parcourir les posts de façon d'avoir les derniers posts en dernier (tout en bas du channel)
-            posts.items.reverse().forEach(product => {
+            posts.items.reverse ().forEach (product => {
                 // Si !product.photo.url
                 if (!product.photo.url) {
                     product.photo.url = "";
                 }
 
                 // Si product.title contient 'bot' alors on pass
-                if (product.title.toUpperCase().includes('BOT ')) {
+                if (product.title.toUpperCase ().includes ('BOT ')) {
                     console.log ('Product ' + product.title + ' contains "bot: "' + product.url);
-                }else if(product.title.toUpperCase().includes(' EBOOK')){
+                } else if (product.title.toUpperCase ().includes (' EBOOK')) {
                     console.log ('Product ' + product.title + ' contains "ebook: "' + product.url);
-                }else if(product.title.toUpperCase().includes('REFUND')){
+                } else if (product.title.toUpperCase ().includes ('REFUND')) {
                     console.log ('Product `' + product.title + '` contains refund: ' + product.url);
-                }else{
-                    const btnLien = new MessageButton()
-                        .setStyle("LINK")
-                        .setURL(product.url)
-                        .setLabel("Voir Annonce")
-                        .setDisabled(false)
+                } else {
+                    const btnLien = new MessageButton ()
+                        .setStyle ("LINK")
+                        .setURL (product.url)
+                        .setLabel ("Voir Annonce")
+                        .setDisabled (false)
 
-                    const btnVendeur= new MessageButton()
-                        .setStyle("LINK")
-                        .setURL(product.user.profile_url)
-                        .setLabel("Vendeur")
-                        .setDisabled(false)
+                    const btnVendeur = new MessageButton ()
+                        .setStyle ("LINK")
+                        .setURL (product.user.profile_url)
+                        .setLabel ("Vendeur")
+                        .setDisabled (false)
 
-                    const btnAcheter = new MessageButton()
-                        .setStyle("LINK")
-                        .setURL("https://www.vinted.fr/transaction/buy/new?source_screen=item&transaction%5Bitem_id%5D=" + product.id)
-                        .setLabel("Acheter")
-                        .setDisabled(false)
+                    const btnAcheter = new MessageButton ()
+                        .setStyle ("LINK")
+                        .setURL ("https://www.vinted.fr/transaction/buy/new?source_screen=item&transaction%5Bitem_id%5D=" + product.id)
+                        .setLabel ("Acheter")
+                        .setDisabled (false)
 
-                    const row = new MessageActionRow().addComponents([btnLien, btnVendeur, btnAcheter]);
+                    const row = new MessageActionRow ().addComponents ([btnLien, btnVendeur, btnAcheter]);
 
-                    const creaEmbed = new MessageEmbed()
-                        .setColor('#0099ff')
-                        .setTitle(product.title)
-                        .setURL(product.url)
-                        .setAuthor({ "name": "Vinted Moniteur | Free", "iconURL": `https://cdn.discordapp.com/avatars/${client.users.id}/${client.users.avatar}.png?size=256`, "url": product.url })
-                        .addFields(
-                            { "name": 'Taille', "value": '```'+ product.size_title + '```'+ '\u200b', "inline": true },
-                            { "name": 'Marque', "value": '```'+product.brand_title+ '```', "inline": true },
-                            { "name": 'Prix', "value": '```'+product.price.substring(0, product.price.length-2)+" €```", "inline": true },
-                            { "name": 'Vendeur', "value": '```'+product.user.login+ '```'+"\u200b" }
+                    const creaEmbed = new MessageEmbed ()
+                        .setColor ('#0099ff')
+                        .setTitle (product.title)
+                        .setURL (product.url)
+                        .setAuthor ({
+                            "name": "Vinted Moniteur | Free",
+                            "iconURL": `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=256`,
+                            "url": product.url
+                        })
+                        .addFields (
+                            {"name": 'Taille', "value": '```' + product.size_title + '```' + '\u200b', "inline": true},
+                            {"name": 'Marque', "value": '```' + product.brand_title + '```', "inline": true},
+                            {
+                                "name": 'Prix',
+                                "value": '```' + product.price.substring (0, product.price.length - 2) + " €```",
+                                "inline": true
+                            },
+                            {"name": 'Vendeur', "value": '```' + product.user.login + '```' + "\u200b"}
                         )
 
-                        .setImage(product.photo.url)
-                        .setTimestamp()
-                        .setFooter({ "text": 'By Jamessss', "iconURL": `https://cdn.discordapp.com/avatars/${client.users.id}/${client.users.id}.png?size=256` });
+                        .setImage (product.photo.url)
+                        .setTimestamp ()
+                        .setFooter ({
+                            "text": 'By Jamessss#7426',
+                            "iconURL": `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=256`
+                        });
 
 
-                // Send the message and the button
+                    // Send the message and the button
 
-                channel.send(
-                    {
-                        "embeds": [creaEmbed], "components": [row]
-                    });
+                    channel.send (
+                        {
+                            "embeds": [creaEmbed], "components": [row]
+                        });
                 }
             });
 
