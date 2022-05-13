@@ -67,7 +67,7 @@
 [![Product Name Screen Shot][product-screenshot1]](https://abib-james.fr)
 <p>Ce BOT permet le recensement d'articles Vinted selon un filtre appliqué par l'utilisateur.</p>
 
-<p>Les données sont récupérées via l'api non-officielle de Androz2091 sur Github, elles sont mises en forme puis envoyées sous la forme de message</p> 
+<p>Les données sont récupérées via l'api non-officielle de Androz2091 sur Github, elles sont ensuite mises en forme et envoyées sous la forme de message</p> 
 
 <p>Le BOT s'occupe de traiter les informations afin de les rendre lisibles pour les utilisateurs</p>
 
