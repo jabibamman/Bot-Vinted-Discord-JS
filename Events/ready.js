@@ -9,10 +9,9 @@ module.exports = async (client, message) => {
     setInterval(function() {
         let statusstyle = [
             '🟢 Le BOT est ON !',
-            `${prefix}help`,
             `${prefix}vinted`
         ]
-        
+
         let status = statusstyle[Math.floor(Math.random() * statusstyle.length)];
         client.user.setPresence({
                 activities: [
