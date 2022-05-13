@@ -18,10 +18,10 @@ module.exports.run = async(client, message, args) => {
     if(!args[1]) {args[1] = ''}
 
 
-
-    if(message.channel.id !== config.vinted_id) {
-        return message.channel.send("Vous devez être dans le channel #vinted pour utiliser cette commande.")
-    }
+    // Pour affecter la commande à un channel spécifique
+    // if(message.channel.id !== '974569752309686322') {
+    //     return message.channel.send("Vous devez être dans le channel #vinted pour utiliser cette commande.")
+    // }
 
     switch (args[0].toUpperCase()) {
         case 'NIKE': brand_id = config.brand[0].id; break;
@@ -85,89 +85,16 @@ module.exports.run = async(client, message, args) => {
 
     }
 
-    // Créer le rôle ayant pour nom la marque
-    let role = message.guild.roles.cache.find(r => r.name === args[0].toUpperCase());
-    // Si le role n'existe pas, on le crée
-    if (!role) {
-        role = await message.guild.roles.create(
-        {
-                "name": args[0].toUpperCase(),
-                "color": 'RANDOM',
-                "permissions": ['0']
-        });
-    }
-
-    // Vérifier si l'user à le role et sinon lui rajouter
-    if (!message.member.roles.cache.has(role.id)) {
-        await message.member.roles.add(role);
-
-    }
-
-    // Créer la catégorie moniteur personnalisé
-    let category = message.guild.channels.cache.find(c => c.name === 'moniteur personnalisé');
-
-    // Si la catégorie n'existe pas, on la crée
-    if (!category) {
-        console.log (role.id);
-        category = await message.guild.channels.create('moniteur personnalisé',
-            {
-                "type": 'GUILD_CATEGORY',
-                "permissionOverwrites": [
-                    {
-                        "id": message.guild.roles.everyone.id,
-                        "deny": ['VIEW_CHANNEL']
-                    },
-                    {
-                        "id": role.id,
-                        "allow": ['VIEW_CHANNEL']
-                    }
-                ]
-
-            });
-    }else{
-       await category.permissionOverwrites.edit (role, {
-           "VIEW_CHANNEL": true
-       });
-    }
-
-    // Le channel est visible seulement s'il a le role
-    let channelPerso = message.guild.channels.cache.find(channel => channel.name === args[0]);
-    if (!channelPerso) {
-        channelPerso = await message.guild.channels.create(args[0].toUpperCase(), {
-            "type": 'text',
-            "permissionOverwrites": [
-                {
-                    "id": message.guild.roles.everyone.id,
-                    "deny": ['VIEW_CHANNEL']
-                },
-                {
-                    "id": role.id,
-                    "allow": ['VIEW_CHANNEL']
-                }
-            ]
-        });
-    }
-
-    // Affecter le channelPerso à la catégorie
-    await channelPerso.setParent(category.id);
-
     // console.log(args[2] + ' ' + args[3] + ' ' + args[4]) // DEBUG : Affiche les arguments
     let lien = `https://www.vinted.fr/vetements?search_text=${search_text}&brand_id[]=${brand_id}&order=newest_first&price_from=${price_from}&currency=EUR&price_to=${price_to}&size_id[]=${size_id}`;
 
-    // Si l'user n'as pas tappé de taille alors on la retire de la requête
+    // Si l'user n'as pas tapé de taille alors on la retire de la requête
     if (size_id === 0) {
         lien = lien.substring(0, lien.length - 12);
     }
 
-    console.log (lien); // DEBUG : Affiche le lien
+    //  console.log (lien); // DEBUG : Affiche le lien
 
-    // Recherche des produits D'Utilisateurs
-    // let lien2 = "https://www.vinted.fr/member/16461279-zelienvs"
-    // vinted.searchProductProfile(lien2).then((posts)=> {
-    //     posts.items.forEach(product => {
-    //         console.log(product);
-    //     });
-    // });
 
     vinted.search(lien).then((posts) => {
         posts.items.reverse().forEach(product => {
@@ -213,14 +140,12 @@ module.exports.run = async(client, message, args) => {
 
 
             // Send the message and the button
-            channelPerso.send(
+            message.channel.send(
                 {
                     "embeds": [creaEmbed], "components": [row]
                 });
 
-
-            // vinted
-            //console.log (product.user);
+            // console.log (product.user); // DEBUG : Affiche les résultats de la recherche (user)
 
             });
 

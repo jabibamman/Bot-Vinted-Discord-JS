@@ -126,15 +126,17 @@ module.exports = {
         marques.forEach (marque => {
             brand_id += marque;
         })
-
+        let photo_url = ''
         let lien = `https://www.vinted.fr/vetements?search_text=${type1}${brand_id}&order=newest_first&price_from=${prix_min}&currency=EUR&price_to=${prix_max}${type1}`;
         // console.log(lien); // debug pour voir le lien
         vinted.search (lien).then ((posts) => {
             // Ici je fais un foreach de posts reverse pour parcourir les posts de façon d'avoir les derniers posts en dernier (tout en bas du channel)
             posts.items.reverse ().forEach (product => {
                 // Si !product.photo.url
-                if (!product.photo.url) {
-                    product.photo.url = "";
+                if (product.photo.url) {
+                    photo_url = product.photo.url;
+                }else{
+                    photo_url = 'https://images.assetsdelivery.com/compings_v2/kaymosk/kaymosk1804/kaymosk180400005.jpg';
                 }
 
                 // Si product.title contient 'bot' alors on pass
@@ -185,7 +187,7 @@ module.exports = {
                             {"name": 'Vendeur', "value": '```' + product.user.login + '```' + "\u200b"}
                         )
 
-                        .setImage (product.photo.url)
+                        .setImage (photo_url)
                         .setTimestamp ()
                         .setFooter ({
                             "text": 'By Jamessss#7426',

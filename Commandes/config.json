@@ -1,12 +1,27 @@
 {
     "color": "#9933FF",
     "Speudo": "vMoniteur",
-    "Image": "https://zupimages.net/up/21/15/awe0.jpg",
-    "Youtube": "https://www.youtube.com/c/lorem",
-    "Twitch": "https://www.twitch.tv/ipsum",
-    "Tiktok": "https://www.tiktok.com/fr/",
-    "Twitter": "https://twitter.com/dolor",
-    "Insta": "https://www.instagram.com/?hl=fr",
+    "role_admin": "A",
+    "catalog": [
+        {
+            "id": 1231,
+            "name": "Chaussures"
+        },
+        {
+            "id": 79,
+            "name": "Sweat & Pull"
+        }
+    ],
+    "channel_free": [
+        {
+            "id": "968459056631132191",
+            "name": "Snkrs"
+        },
+        {
+            "id": "968459034296459264",
+            "name": "Pull"
+        }
+    ],
     "size": [
         {
             "id": "206",
@@ -190,29 +205,6 @@
         {
             "id": "362",
             "name": "Carhartt"
-        }
-    ],
-    "vinted_id": "959146840085909555",
-    "modo_id": "961903262531981342",
-    "role_admin": "A",
-    "catalog": [
-        {
-            "id": 1231,
-            "name": "Chaussures"
-        },
-        {
-            "id": 79,
-            "name": "Sweat & Pull"
-        }
-    ],
-    "channel_free": [
-        {
-            "id": "968459056631132191",
-            "name": "Snkrs"
-        },
-        {
-            "id": "968459034296459264",
-            "name": "Pull"
         }
     ]
 }
